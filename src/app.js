@@ -1,31 +1,19 @@
 const express = require('express');
 
-const productAll = require('./models/productAll.model');
-const productId = require('./models/productId.model');
+const { productAllController } = require('./controllers/productAll.controller');
+const { productIdController } = require('./controllers/productId.controller');
 
 const app = express();
+app.use(express.json());
 
 // não remova esse endpoint, é para o avaliador funcionar
 app.get('/', (_request, response) => {
   response.send();
 });
 
-app.get('/products', async (_req, res) => {
-  const [listAll] = await productAll();
+app.get('/products', productAllController);
 
-  res.status(200).json(listAll);
-});
-
-app.get('/products/:id', async (req, res) => {
-  const { id } = req.params;
-  const [[listId]] = await productId(Number(id));
-
-  if (!listId) {
-    return res.status(404).json({ message: 'Product not found' });
-  }
-
-  res.status(200).json(listId);
-});
+app.get('/products/:id', productIdController);
 
 // não remova essa exportação, é para o avaliador funcionar
 // você pode registrar suas rotas normalmente, como o exemplo acima

@@ -1,6 +1,6 @@
 const { connection } = require('./connection');
 
-const productId = async (id) => {
+const productIdModel = async (id) => {
   const itemId = await connection.execute(
     'SELECT * FROM StoreManager.products WHERE id = ?',
     [id],
@@ -9,4 +9,4 @@ const productId = async (id) => {
   return itemId;
 };
 
-module.exports = productId;
+module.exports = productIdModel;
