@@ -85,6 +85,6 @@ describe('Testes de cobertura da função productInsert em Controllers', functio
     await productInsertController(req, res);
     
     expect(res.status).to.have.been.calledWith(201);
-    expect(res.json).not.to.have.been.calledWith({ id: 4, ...newProduct });
+    expect(res.json).not.to.have.been.calledWith({ ...newProduct });
   });
 });
