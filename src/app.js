@@ -3,11 +3,16 @@ const express = require('express');
 const { productAllController } = require('./controllers/productAll.controller');
 const { productIdController } = require('./controllers/productId.controller');
 const { productInsertController } = require('./controllers/productInsert.controller');
+const { productUpdateController } = require('./controllers/productUpdate.controller');
 const { salesInsertController } = require('./controllers/salesInsert.controller');
 const { salesAllController } = require('./controllers/salesAll.controller');
 const { salesIdController } = require('./controllers/salesId.controller');
 
-const validationProductPost = require('./middlewares/validationProduct');
+const {
+  validationProductPost,
+  validationProductPut,
+} = require('./middlewares/validationProduct');
+
 const {
   validationSalesProductIdPost,
   validationSalesQuantityPost,
@@ -32,6 +37,12 @@ app.post(
   validationSalesProductIdPost,
   validationSalesQuantityPost,
   salesInsertController,
+);
+
+app.put(
+  '/products/:id',
+  validationProductPut,
+  productUpdateController,
 );
 
 // não remova essa exportação, é para o avaliador funcionar
