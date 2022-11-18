@@ -4,6 +4,7 @@ const { productAllController } = require('./controllers/productAll.controller');
 const { productIdController } = require('./controllers/productId.controller');
 const { productInsertController } = require('./controllers/productInsert.controller');
 const { productUpdateController } = require('./controllers/productUpdate.controller');
+const { productDeleteController } = require('./controllers/productDelete.controller');
 const { salesInsertController } = require('./controllers/salesInsert.controller');
 const { salesAllController } = require('./controllers/salesAll.controller');
 const { salesIdController } = require('./controllers/salesId.controller');
@@ -44,6 +45,8 @@ app.put(
   validationProductPut,
   productUpdateController,
 );
+
+app.delete('/products/:id', productDeleteController);
 
 // não remova essa exportação, é para o avaliador funcionar
 // você pode registrar suas rotas normalmente, como o exemplo acima
